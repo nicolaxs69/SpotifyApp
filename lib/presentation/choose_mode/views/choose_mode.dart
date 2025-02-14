@@ -68,7 +68,7 @@ class ChooseModePage extends StatelessWidget {
                       },
                     ),
                     _ModeOption(
-                      title: "Light Mode",
+                      title: "Light Mode", 
                       svgAsset: AppVectors.sunLogo,
                       onTap: () {
                         context.read<ThemeCubit>().changeTheme(ThemeMode.light);
@@ -95,7 +95,6 @@ class ChooseModePage extends StatelessWidget {
     );
   }
 }
-
 class _ModeOption extends StatelessWidget {
   final String title;
   final String svgAsset;
