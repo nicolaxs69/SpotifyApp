@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:refresh_flutter/core/configs/theme/app_colors.dart';
 
 class BasicButton extends StatelessWidget {
   final VoidCallback onPressed;
@@ -22,9 +21,9 @@ class BasicButton extends StatelessWidget {
       child: Text(
         title,
         style: const TextStyle(
-          fontSize: 22,
+          fontSize: 19,
           fontWeight: FontWeight.bold,
-          color: AppColors.grey,
+          color: Colors.white,
         ),
       ),
     );
