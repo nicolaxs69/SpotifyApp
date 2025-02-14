@@ -1,10 +1,13 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:refresh_flutter/common/widgets/button/basic_button.dart';
 import 'package:refresh_flutter/core/configs/assets/app_images.dart';
 import 'package:refresh_flutter/core/configs/assets/app_vectors.dart';
+import 'package:refresh_flutter/presentation/authentication/views/signup.dart';
+import 'package:refresh_flutter/presentation/choose_mode/bloc/theme_cubit.dart';
 
 class ChooseModePage extends StatelessWidget {
   const ChooseModePage({super.key});
@@ -57,65 +60,19 @@ class ChooseModePage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Column(
-                      children: [
-                        ClipOval(
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                            child: Container(
-                              height: 73,
-                              width: 73,
-                              decoration: BoxDecoration(
-                                color: const Color(0xff30393C).withOpacity(0.5),
-                                shape: BoxShape.circle,
-                              ),
-                              child: SvgPicture.asset(
-                                AppVectors.moonLogo,
-                                fit: BoxFit.none,
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        const Text(
-                          "Dark Mode",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 13,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
+                    _ModeOption(
+                      title: "Dark Mode",
+                      svgAsset: AppVectors.moonLogo,
+                      onTap: () {
+                        context.read<ThemeCubit>().changeTheme(ThemeMode.dark);
+                      },
                     ),
-                    Column(
-                      children: [
-                        ClipOval(
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                            child: Container(
-                              height: 73,
-                              width: 73,
-                              decoration: BoxDecoration(
-                                color: const Color(0xff30393C).withOpacity(0.5),
-                                shape: BoxShape.circle,
-                              ),
-                              child: SvgPicture.asset(
-                                AppVectors.sunLogo,
-                                fit: BoxFit.none,
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        const Text(
-                          "Ligth Mode",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 13,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
+                    _ModeOption(
+                      title: "Light Mode",
+                      svgAsset: AppVectors.sunLogo,
+                      onTap: () {
+                        context.read<ThemeCubit>().changeTheme(ThemeMode.light);
+                      },
                     ),
                   ],
                 ),
@@ -125,8 +82,7 @@ class ChooseModePage extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              const ChooseModePage()),
+                          builder: (BuildContext context) => const Signup()),
                     );
                   },
                   title: "Continue",
@@ -136,6 +92,56 @@ class ChooseModePage extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _ModeOption extends StatelessWidget {
+  final String title;
+  final String svgAsset;
+  final VoidCallback onTap;
+
+  const _ModeOption({
+    required this.title,
+    required this.svgAsset,
+    required this.onTap,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        GestureDetector(
+          onTap: onTap,
+          child: ClipOval(
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+              child: Container(
+                height: 73,
+                width: 73,
+                decoration: BoxDecoration(
+                  color: const Color(0xff30393C).withOpacity(0.5),
+                  shape: BoxShape.circle,
+                ),
+                child: SvgPicture.asset(
+                  svgAsset,
+                  fit: BoxFit.none,
+                ),
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: 10),
+        Text(
+          title,
+          style: const TextStyle(
+            fontWeight: FontWeight.w500,
+            fontSize: 13,
+            color: Colors.white,
+          ),
+        ),
+      ],
     );
   }
 }
