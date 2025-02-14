@@ -1,24 +1,16 @@
-# SpotifyApp
+# refresh_flutter
 
-A Flutter application with a beautiful dark/light mode selection interface.
-
-## Features
-
-- Theme mode selection
-- Modern and clean UI design
-- Responsive layout
-- Custom animations and transitions
+A new Flutter project.
 
 ## Getting Started
 
-To run this project:
+This project is a starting point for a Flutter application.
 
-1. Ensure you have Flutter installed
-2. Clone this repository
-3. Run `flutter pub get`
-4. Run `flutter run`
+A few resources to get you started if this is your first Flutter project:
 
-## Requirements
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-- Flutter 3.0.0 or higher
-- Dart SDK 2.17.0 or higher
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.

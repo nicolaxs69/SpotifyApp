@@ -5,7 +5,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:refresh_flutter/common/widgets/button/basic_button.dart';
 import 'package:refresh_flutter/core/configs/assets/app_images.dart';
 import 'package:refresh_flutter/core/configs/assets/app_vectors.dart';
-import 'package:refresh_flutter/core/configs/theme/app_colors.dart';
 
 class ChooseModePage extends StatelessWidget {
   const ChooseModePage({super.key});
