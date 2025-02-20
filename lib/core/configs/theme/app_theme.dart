@@ -8,6 +8,10 @@ class AppTheme {
     brightness: Brightness.light,
     fontFamily: 'Satoshi',
     inputDecorationTheme: InputDecorationTheme(
+      hintStyle: const TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+      ),
       filled: true,
       fillColor: Colors.transparent,
       contentPadding: const EdgeInsets.all(30),
@@ -36,6 +40,10 @@ class AppTheme {
     brightness: Brightness.dark,
     fontFamily: 'Satoshi',
     inputDecorationTheme: InputDecorationTheme(
+      hintStyle: const TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+      ),
       filled: true,
       fillColor: Colors.transparent,
       contentPadding: const EdgeInsets.all(30),
