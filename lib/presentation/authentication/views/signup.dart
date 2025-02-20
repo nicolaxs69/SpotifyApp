@@ -6,6 +6,7 @@ import 'package:refresh_flutter/common/widgets/button/basic_button.dart';
 import 'package:refresh_flutter/core/configs/assets/app_images.dart';
 import 'package:refresh_flutter/core/configs/assets/app_vectors.dart';
 import 'package:refresh_flutter/core/configs/theme/app_colors.dart';
+import 'package:refresh_flutter/presentation/authentication/views/login.dart';
 import 'package:refresh_flutter/presentation/authentication/views/register.dart';
 
 class SignupView extends StatelessWidget {
@@ -107,7 +108,14 @@ class SignupView extends StatelessWidget {
         Expanded(
           flex: 1,
           child: TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (BuildContext context) => const LoginView(),
+                ),
+              );
+            },
             child: Text(
               "Sing in",
               style: TextStyle(
