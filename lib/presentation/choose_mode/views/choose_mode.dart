@@ -9,8 +9,8 @@ import 'package:refresh_flutter/core/configs/assets/app_vectors.dart';
 import 'package:refresh_flutter/presentation/authentication/views/signup.dart';
 import 'package:refresh_flutter/presentation/choose_mode/bloc/theme_cubit.dart';
 
-class ChooseModePage extends StatelessWidget {
-  const ChooseModePage({super.key});
+class ChooseModeView extends StatelessWidget {
+  const ChooseModeView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +82,7 @@ class ChooseModePage extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (BuildContext context) => const Signup()),
+                          builder: (BuildContext context) => const SignupView()),
                     );
                   },
                   title: "Continue",

@@ -70,7 +70,7 @@ class GetStartedView extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (BuildContext context) =>
-                              const ChooseModePage()),
+                              const ChooseModeView()),
                     );
                   },
                   title: "Get Started",
