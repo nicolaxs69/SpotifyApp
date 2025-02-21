@@ -9,7 +9,7 @@ import 'package:refresh_flutter/core/configs/assets/app_vectors.dart';
 import 'package:refresh_flutter/data/models/auth/sigin_user_request.dart';
 import 'package:refresh_flutter/domain/usecases/authentication/signin.dart';
 import 'package:refresh_flutter/presentation/home/views/home.dart';
-import 'package:refresh_flutter/service-+_locator.dart';
+import 'package:refresh_flutter/service_locator.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
