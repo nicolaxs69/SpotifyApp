@@ -6,6 +6,10 @@ import 'package:refresh_flutter/common/widgets/button/basic_button.dart';
 import 'package:refresh_flutter/common/widgets/or_divider.dart';
 import 'package:refresh_flutter/common/widgets/register_login_footer.dart';
 import 'package:refresh_flutter/core/configs/assets/app_vectors.dart';
+import 'package:refresh_flutter/data/models/auth/sigin_user_request.dart';
+import 'package:refresh_flutter/domain/usecases/authentication/signin.dart';
+import 'package:refresh_flutter/presentation/home/views/home.dart';
+import 'package:refresh_flutter/service-+_locator.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -16,11 +20,20 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   bool passwordVisible = false;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     passwordVisible = true;
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 
   @override
@@ -57,7 +70,30 @@ class _LoginViewState extends State<LoginView> {
                 },
               ),
               const SizedBox(height: 40),
-              BasicButton(onPressed: () {}, title: "Sign In"),
+              BasicButton(
+                  onPressed: () async {
+                    var result = await serviceLocator<SigninUseCase>().call(
+                      SignInUserRequest(
+                        email: _emailController.text.toString(),
+                        password: _passwordController.text.toString(),
+                      ),
+                    );
+                    result.fold(
+                      (ifLeft) {
+                        var snackbar = SnackBar(content: Text(ifLeft));
+                        ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                      },
+                      (ifRight) {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    const HomeView()),
+                            (route) => false);
+                      },
+                    );
+                  },
+                  title: "Sign In"),
               const SizedBox(height: 40),
               const OrDivider(),
               const SizedBox(height: 40),
@@ -66,6 +102,32 @@ class _LoginViewState extends State<LoginView> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _fullNameField(BuildContext context) {
+    return TextField(
+      controller: _emailController,
+      decoration: const InputDecoration(
+        hintText: "Enter Username Or Email",
+      ).applyDefaults(Theme.of(context).inputDecorationTheme),
+    );
+  }
+
+  Widget _passwordField(
+      BuildContext context, bool passwordVisible, VoidCallback togglePassword) {
+    return TextField(
+      controller: _passwordController,
+      obscureText: passwordVisible,
+      decoration: InputDecoration(
+        hintText: "Password",
+        suffixIcon: IconButton(
+          icon: Icon(
+            passwordVisible ? Icons.visibility : Icons.visibility_off,
+          ),
+          onPressed: togglePassword,
+        ),
+      ).applyDefaults(Theme.of(context).inputDecorationTheme),
     );
   }
 }
@@ -100,29 +162,5 @@ Widget _supportText(BuildContext context) {
         ),
       ],
     ),
-  );
-}
-
-Widget _fullNameField(BuildContext context) {
-  return TextField(
-    decoration: const InputDecoration(
-      hintText: "Enter Username Or Email",
-    ).applyDefaults(Theme.of(context).inputDecorationTheme),
-  );
-}
-
-Widget _passwordField(
-    BuildContext context, bool passwordVisible, VoidCallback togglePassword) {
-  return TextField(
-    obscureText: passwordVisible,
-    decoration: InputDecoration(
-      hintText: "Password",
-      suffixIcon: IconButton(
-        icon: Icon(
-          passwordVisible ? Icons.visibility : Icons.visibility_off,
-        ),
-        onPressed: togglePassword,
-      ),
-    ).applyDefaults(Theme.of(context).inputDecorationTheme),
   );
 }

@@ -8,6 +8,7 @@ import 'package:refresh_flutter/common/widgets/register_login_footer.dart';
 import 'package:refresh_flutter/core/configs/assets/app_vectors.dart';
 import 'package:refresh_flutter/data/models/auth/create_user_request.dart';
 import 'package:refresh_flutter/domain/usecases/authentication/signup.dart';
+import 'package:refresh_flutter/presentation/home/views/home.dart';
 import 'package:refresh_flutter/service_locator.dart';
 
 class RegisterView extends StatefulWidget {
@@ -87,7 +88,14 @@ class _RegisterViewState extends State<RegisterView> {
                         var snackbar = SnackBar(content: Text(ifLeft));
                         ScaffoldMessenger.of(context).showSnackBar(snackbar);
                       },
-                      (ifRight) {},
+                      (ifRight) {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    const HomeView()),
+                            (route) => false);
+                      },
                     );
                   },
                   title: "Create Account"),
