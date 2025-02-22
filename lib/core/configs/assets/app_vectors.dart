@@ -9,4 +9,5 @@ class AppVectors{
   static const String patternBottomLogo = '${basePath}bottom_pattern_logo$format';
   static const String appleLogo = '${basePath}apple_logo$format';
   static const String googleLogo = '${basePath}google_logo$format';
+  static const String albumHomeLogo = '${basePath}album_home_logo$format';
 }

@@ -3,7 +3,8 @@ import 'package:refresh_flutter/common/helpers/is_dark_mode.dart';
 
 class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? title;
-  const BasicAppBar({this.title, super.key});
+  final bool? hideBack;
+  const BasicAppBar({this.title, this.hideBack, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,7 @@ class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       centerTitle: true,
       title: title ?? const Text(""),
-      leading: IconButton(
+      leading: (hideBack ?? false) ? null : IconButton(
         onPressed: () {
           Navigator.pop(context);
         },
