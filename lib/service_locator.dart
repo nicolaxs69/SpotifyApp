@@ -7,6 +7,7 @@ import 'package:refresh_flutter/domain/repository/authentication/auth_repository
 import 'package:refresh_flutter/domain/repository/song/song.dart';
 import 'package:refresh_flutter/domain/usecases/authentication/signin.dart';
 import 'package:refresh_flutter/domain/usecases/authentication/signup.dart';
+import 'package:refresh_flutter/domain/usecases/song/fetch_playlist.dart';
 import 'package:refresh_flutter/domain/usecases/song/fetch_songs.dart';
 
 final serviceLocator = GetIt.instance;
@@ -38,5 +39,9 @@ Future<void> initializeDependencies() async {
 
   serviceLocator.registerSingleton<FetchSongsUseCase>(
     FetchSongsUseCase(),
+  );
+
+  serviceLocator.registerSingleton<FetchPlaylistUseCase>(
+    FetchPlaylistUseCase(),
   );
 }

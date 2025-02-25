@@ -5,6 +5,8 @@ import 'package:refresh_flutter/domain/entities/song/song.dart';
 
 abstract class SongFirebaseService {
   Future<Either> fetchSongs();
+
+  Future<Either> fetchPlaylist();
 }
 
 class SongFirebaseServiceImpl implements SongFirebaseService {
@@ -15,7 +17,7 @@ class SongFirebaseServiceImpl implements SongFirebaseService {
       var data = await FirebaseFirestore.instance
           .collection('Songs')
           .orderBy('releaseDate', descending: true)
-          .limit(3)
+          .limit(4)
           .get();
 
       for (var doc in data.docs) {
@@ -25,6 +27,26 @@ class SongFirebaseServiceImpl implements SongFirebaseService {
       return Right(songs);
     } catch (e) {
       print("Error fetching songs: $e");
+      return const Left("An error occurred, please try again later");
+    }
+  }
+
+  @override
+  Future<Either> fetchPlaylist() async {
+    try {
+      List<SongEntity> songs = [];
+      var data = await FirebaseFirestore.instance
+          .collection('Songs')
+          .orderBy('releaseDate', descending: true)
+          .get();
+
+      for (var doc in data.docs) {
+        var songModel = SongModel.fromJson(doc.data());
+        songs.add(songModel.toEntity());
+      }
+      return Right(songs);
+    } catch (e) {
+      print("Error fetching playlists: $e");
       return const Left("An error occurred, please try again later");
     }
   }

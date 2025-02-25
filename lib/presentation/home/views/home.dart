@@ -6,6 +6,7 @@ import 'package:refresh_flutter/core/configs/assets/app_images.dart';
 import 'package:refresh_flutter/core/configs/assets/app_vectors.dart';
 import 'package:refresh_flutter/core/configs/theme/app_colors.dart';
 import 'package:refresh_flutter/presentation/home/widgets/new_songs.dart';
+import 'package:refresh_flutter/presentation/home/widgets/playlist_songs.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -21,7 +22,7 @@ class _HomeViewState extends State<HomeView>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 4, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
   }
 
   @override
@@ -42,24 +43,28 @@ class _HomeViewState extends State<HomeView>
         ),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _albumCover(),
-            _tabs(),
-            SizedBox(
-              height: 260,
-              child: TabBarView(
-                controller: _tabController,
-                children: [
-                  NewSongs(),
-                  Container(),
-                  Container(),
-                  Container(),
-                ],
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _albumCover(),
+              _tabs(),
+              SizedBox(
+                height: 260,
+                child: TabBarView(
+                  controller: _tabController,
+                  children: const [
+                    NewSongs(),
+                    Center(child: Text('Video Content Coming Soon')),
+                    Center(child: Text('Artist Content Coming Soon')),
+                  ],
+                ),
               ),
-            ),
-          ],
+              const SizedBox(height: 30),
+              const PlaylistSongs(),
+            ],
+          ),
         ),
       ),
     );
@@ -99,6 +104,8 @@ class _HomeViewState extends State<HomeView>
       controller: _tabController,
       labelColor: context.isDarkMode ? Colors.white : Colors.black,
       indicatorColor: AppColors.primary,
+      indicatorSize: TabBarIndicatorSize.label,
+      dividerColor: Colors.transparent,
       isScrollable: true,
       tabs: const [
         Text("News",

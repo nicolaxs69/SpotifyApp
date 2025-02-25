@@ -5,7 +5,12 @@ import 'package:refresh_flutter/service_locator.dart';
 
 class SongRepositoryImpl extends SongRepository {
   @override
-  Future<Either> fetchSongs() async{
+  Future<Either> fetchSongs() async {
     return await serviceLocator<SongFirebaseService>().fetchSongs();
+  }
+
+  @override
+  Future<Either> fetchPlaylist() async {
+    return await serviceLocator<SongFirebaseService>().fetchPlaylist();
   }
 }
