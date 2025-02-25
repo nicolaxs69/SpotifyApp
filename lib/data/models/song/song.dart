@@ -18,7 +18,11 @@ class SongModel {
     title = data['title'] as String;
     artist = data['artist'] as String;
     releaseDate = data['releaseDate'] as Timestamp;
-    duration = data['duration'] as num;
+    if (data['duration'] is String) {
+      duration = double.parse(data['duration'] as String);
+    } else {
+      duration = data['duration'] as num;
+    }
   }
 }
 
