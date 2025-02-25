@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:refresh_flutter/presentation/Intro/views/custom_painter.dart';
 
 class Animation10 extends StatefulWidget {
-  const Animation10({Key? key}) : super(key: key);
+  const Animation10({super.key});
 
   @override
   _Animation10State createState() => _Animation10State();

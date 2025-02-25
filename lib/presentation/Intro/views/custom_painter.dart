@@ -185,12 +185,12 @@ class RPSCustomPainter extends CustomPainter {
     path_1.close();
 
     // Paint the original shape (optional, if you want to keep the outline or background)
-    Paint paint_0_fill = Paint()..style = PaintingStyle.fill;
-    paint_0_fill.color = Color(0xffFFAA5B).withOpacity(0.2);
-    canvas.drawPath(path_0, paint_0_fill);
+    Paint paint0Fill = Paint()..style = PaintingStyle.fill;
+    paint0Fill.color = const Color(0xffFFAA5B).withOpacity(0.2);
+    canvas.drawPath(path_0, paint0Fill);
 
-    Paint paint_1_fill = Paint()..style = PaintingStyle.fill;
-    paint_1_fill.color = Color(0xffFFAA5B).withOpacity(1.0);
+    Paint paint1Fill = Paint()..style = PaintingStyle.fill;
+    paint1Fill.color = const Color(0xffFFAA5B).withOpacity(1.0);
     //canvas.drawPath(path_1,paint_1_fill); // Comment out this line if you only want the wave
 
     // **Clip the canvas to the lightning bolt path**
@@ -198,7 +198,7 @@ class RPSCustomPainter extends CustomPainter {
 
     // **Draw the wave inside the clipped area**
     Paint wavePaint = Paint()
-      ..color = Color(0xFFFFAA5B) // Choose your wave color
+      ..color = const Color(0xFFFFAA5B) // Choose your wave color
       ..style = PaintingStyle.fill; // Or PaintingStyle.stroke for lines
 
     Path wavePath = Path();

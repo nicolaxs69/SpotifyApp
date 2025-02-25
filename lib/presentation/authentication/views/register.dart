@@ -50,9 +50,7 @@ class _RegisterViewState extends State<RegisterView> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 28,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 28),
           child: Column(
             children: [
               const SizedBox(height: 50),
@@ -64,41 +62,33 @@ class _RegisterViewState extends State<RegisterView> {
               const SizedBox(height: 20),
               _emailField(context),
               const SizedBox(height: 20),
-              _passwordField(
-                context,
-                passwordVisible,
-                () {
-                  setState(() {
-                    passwordVisible = !passwordVisible;
-                  });
-                },
-              ),
+              _passwordField(context),
               const SizedBox(height: 40),
               BasicButton(
-                  onPressed: () async {
-                    var result = await serviceLocator<SignupUseCase>().call(
-                      CreateUserRequest(
-                        fullName: _fullNameController.text.toString(),
-                        email: _emailController.text.toString(),
-                        password: _passwordController.text.toString(),
-                      ),
-                    );
-                    result.fold(
-                      (ifLeft) {
-                        var snackbar = SnackBar(content: Text(ifLeft));
-                        ScaffoldMessenger.of(context).showSnackBar(snackbar);
-                      },
-                      (ifRight) {
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    const HomeView()),
-                            (route) => false);
-                      },
-                    );
-                  },
-                  title: "Create Account"),
+                onPressed: () async {
+                  var result = await serviceLocator<SignupUseCase>().call(
+                    CreateUserRequest(
+                      fullName: _fullNameController.text.toString(),
+                      email: _emailController.text.toString(),
+                      password: _passwordController.text.toString(),
+                    ),
+                  );
+                  result.fold(
+                    (ifLeft) {
+                      var snackbar = SnackBar(content: Text(ifLeft));
+                      ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                    },
+                    (ifRight) {
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (BuildContext context) => const HomeView()),
+                        (route) => false,
+                      );
+                    },
+                  );
+                },
+                title: "Create Account",
+              ),
               const SizedBox(height: 40),
               const OrDivider(),
               const SizedBox(height: 40),
@@ -113,10 +103,7 @@ class _RegisterViewState extends State<RegisterView> {
   Widget _registerText() {
     return const Text(
       "Register",
-      style: TextStyle(
-        fontSize: 30,
-        fontWeight: FontWeight.bold,
-      ),
+      style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
       textAlign: TextAlign.center,
     );
   }
@@ -128,16 +115,11 @@ class _RegisterViewState extends State<RegisterView> {
         style: TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w300,
-          color: context.isDarkMode
-              ? Colors.white
-              : Colors.black, // default color, adjust as needed
+          color: context.isDarkMode ? Colors.white : Colors.black,
         ),
         children: const [
           TextSpan(text: "If You Need Any Support "),
-          TextSpan(
-            text: "Click Here",
-            style: TextStyle(color: Colors.green),
-          ),
+          TextSpan(text: "Click Here", style: TextStyle(color: Colors.green)),
         ],
       ),
     );
@@ -161,18 +143,15 @@ class _RegisterViewState extends State<RegisterView> {
     );
   }
 
-  Widget _passwordField(
-      BuildContext context, bool passwordVisible, VoidCallback togglePassword) {
+  Widget _passwordField(BuildContext context) {
     return TextField(
       controller: _passwordController,
       obscureText: !passwordVisible,
       decoration: InputDecoration(
         hintText: "Password",
         suffixIcon: IconButton(
-          icon: Icon(
-            passwordVisible ? Icons.visibility : Icons.visibility_off,
-          ),
-          onPressed: togglePassword,
+          icon: Icon(passwordVisible ? Icons.visibility : Icons.visibility_off),
+          onPressed: () => setState(() => passwordVisible = !passwordVisible),
         ),
       ).applyDefaults(Theme.of(context).inputDecorationTheme),
     );

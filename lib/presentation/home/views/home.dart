@@ -1,16 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:refresh_flutter/common/helpers/is_dark_mode.dart';
 import 'package:refresh_flutter/common/widgets/appbar/app_bar.dart';
 import 'package:refresh_flutter/core/configs/assets/app_images.dart';
 import 'package:refresh_flutter/core/configs/assets/app_vectors.dart';
+import 'package:refresh_flutter/core/configs/theme/app_colors.dart';
+import 'package:refresh_flutter/presentation/home/widgets/new_songs.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
+
+  @override
+  _HomeViewState createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 4, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BasicAppBar(
+        hideBack: true,
         title: SvgPicture.asset(
           width: 108,
           height: 33,
@@ -19,12 +43,26 @@ class HomeView extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             _albumCover(),
+            _tabs(),
+            SizedBox(
+              height: 260,
+              child: TabBarView(
+                controller: _tabController,
+                children: [
+                  NewSongs(),
+                  Container(),
+                  Container(),
+                  Container(),
+                ],
+              ),
+            ),
           ],
         ),
-        ),
-      );
+      ),
+    );
   }
 
   Widget _albumCover() {
@@ -51,6 +89,27 @@ class HomeView extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _tabs() {
+    return TabBar(
+      tabAlignment: TabAlignment.start,
+      padding: const EdgeInsets.symmetric(vertical: 20),
+      controller: _tabController,
+      labelColor: context.isDarkMode ? Colors.white : Colors.black,
+      indicatorColor: AppColors.primary,
+      isScrollable: true,
+      tabs: const [
+        Text("News",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+        Text("Video",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+        Text("Artist",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+        Text("Podcast",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+      ],
     );
   }
 }

@@ -72,32 +72,34 @@ class _LoginViewState extends State<LoginView> {
               const SizedBox(height: 40),
               BasicButton(
                   onPressed: () async {
-                       Navigator.pushAndRemoveUntil(
+                    // Uncomment to bypass authentication
+
+                    //  Navigator.pushAndRemoveUntil(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //           builder: (BuildContext context) =>
+                    //               const HomeView()),
+                    //       (route) => false);
+                    var result = await serviceLocator<SigninUseCase>().call(
+                      SignInUserRequest(
+                        email: _emailController.text.toString(),
+                        password: _passwordController.text.toString(),
+                      ),
+                    );
+                    result.fold(
+                      (ifLeft) {
+                        var snackbar = SnackBar(content: Text(ifLeft));
+                        ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                      },
+                      (ifRight) {
+                        Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
                                     const HomeView()),
                             (route) => false);
-                    // var result = await serviceLocator<SigninUseCase>().call(
-                    //   SignInUserRequest(
-                    //     email: _emailController.text.toString(),
-                    //     password: _passwordController.text.toString(),
-                    //   ),
-                    // );
-                    // result.fold(
-                    //   (ifLeft) {
-                    //     var snackbar = SnackBar(content: Text(ifLeft));
-                    //     ScaffoldMessenger.of(context).showSnackBar(snackbar);
-                    //   },
-                    //   (ifRight) {
-                    //     Navigator.pushAndRemoveUntil(
-                    //         context,
-                    //         MaterialPageRoute(
-                    //             builder: (BuildContext context) =>
-                    //                 const HomeView()),
-                    //         (route) => false);
-                    //   },
-                    // );
+                      },
+                    );
                   },
                   title: "Sign In"),
               const SizedBox(height: 40),
