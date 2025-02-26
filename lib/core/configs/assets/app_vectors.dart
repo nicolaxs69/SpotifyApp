@@ -13,4 +13,6 @@ class AppVectors {
   static const String albumHomeLogo = '${basePath}album_home_logo$format';
   static const String playLogo = '${basePath}play_logo$format';
   static const String heartLogo = '${basePath}heart_logo$format';
+  static const String heartEmptyLogo = '${basePath}heart_empty_logo$format';
 }
+  

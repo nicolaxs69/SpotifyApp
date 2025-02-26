@@ -7,6 +7,7 @@ import 'package:refresh_flutter/core/configs/theme/app_colors.dart';
 import 'package:refresh_flutter/domain/entities/song/song.dart';
 import 'package:refresh_flutter/presentation/home/bloc/playlist_cubit.dart';
 import 'package:refresh_flutter/presentation/home/bloc/playlist_state.dart';
+import 'package:refresh_flutter/presentation/song_player/views/song_player.dart';
 
 class PlaylistSongs extends StatelessWidget {
   const PlaylistSongs({super.key});
@@ -63,29 +64,41 @@ class PlaylistSongs extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        _playIcon(context),
+        _playIcon(context, song),
         Expanded(
           flex: 3,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                song.title,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (BuildContext context) => SongPlayerView(
+                    songEntity: song,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 5),
-              Text(
-                song.artist,
-                style: const TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.normal,
+              );
+            },
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  song.title,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-            ],
+                const SizedBox(height: 5),
+                Text(
+                  song.artist,
+                  style: const TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         Flexible(
@@ -132,21 +145,33 @@ class PlaylistSongs extends StatelessWidget {
     );
   }
 
-  Widget _playIcon(BuildContext context) {
-    return Container(
-      width: 40,
-      height: 40,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color:
-            context.isDarkMode ? AppColors.darkGrey : const Color(0xFFE6E6E6),
-      ),
-      child: SvgPicture.asset(
-        AppVectors.playLogo,
-        fit: BoxFit.none,
-        colorFilter: context.isDarkMode
-            ? const ColorFilter.mode(Color(0xFF959595), BlendMode.srcIn)
-            : const ColorFilter.mode(Colors.black, BlendMode.srcIn),
+  Widget _playIcon(BuildContext context, SongEntity song) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (BuildContext context) => SongPlayerView(
+              songEntity: song,
+            ),
+          ),
+        );
+      },
+      child: Container(
+        width: 40,
+        height: 40,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color:
+              context.isDarkMode ? AppColors.darkGrey : const Color(0xFFE6E6E6),
+        ),
+        child: SvgPicture.asset(
+          AppVectors.playLogo,
+          fit: BoxFit.none,
+          colorFilter: context.isDarkMode
+              ? const ColorFilter.mode(Color(0xFF959595), BlendMode.srcIn)
+              : const ColorFilter.mode(Colors.black, BlendMode.srcIn),
+        ),
       ),
     );
   }
