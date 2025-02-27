@@ -153,30 +153,63 @@ class SongPlayerView extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 40),
-              GestureDetector(
-                onTap: () {
-                  context.read<SongPlayerCubit>().playOrPause(songUrl);
-                },
-                child: Container(
-                  height: 72,
-                  width: 72,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: AppColors.primary,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  SvgPicture.asset(
+                    AppVectors.repeatLogo,
+                    height: 30,
+                    width: 30,
+                    color: context.isDarkMode ? Colors.white : Colors.black,
                   ),
-                  child: Center(
-                    child: SvgPicture.asset(
-                      context.read<SongPlayerCubit>().audioPlayer.playing
-                          ? AppVectors.pauseLogo
-                          : AppVectors.playLogo,
-                      height: 40,
-                      width: 40,
-                      fit: BoxFit.contain,
-                      colorFilter:
-                          const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                  const SizedBox(width: 20),
+                  SvgPicture.asset(
+                    AppVectors.playPreviousLogo,
+                    height: 30,
+                    width: 30,
+                    color: context.isDarkMode ? Colors.white : Colors.black,
+                  ),
+                  const SizedBox(width: 20),
+                  GestureDetector(
+                    onTap: () {
+                      context.read<SongPlayerCubit>().playOrPause(songUrl);
+                    },
+                    child: Container(
+                      height: 72,
+                      width: 72,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: AppColors.primary,
+                      ),
+                      child: Center(
+                        child: SvgPicture.asset(
+                          context.read<SongPlayerCubit>().audioPlayer.playing
+                              ? AppVectors.pauseLogo
+                              : AppVectors.playLogo,
+                          height: 30,
+                          width: 30,
+                          fit: BoxFit.contain,
+                          colorFilter: const ColorFilter.mode(
+                              Colors.white, BlendMode.srcIn),
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                  const SizedBox(width: 20),
+                  SvgPicture.asset(
+                    AppVectors.playNextLogo,
+                    height: 30,
+                    width: 30,
+                    color: context.isDarkMode ? Colors.white : Colors.black,
+                  ),
+                  const SizedBox(width: 20),
+                  SvgPicture.asset(
+                    AppVectors.shuffleLogo,
+                    height: 30,
+                    width: 30,
+                    color: context.isDarkMode ? Colors.white : Colors.black,
+                  ),
+                ],
               )
             ],
           );

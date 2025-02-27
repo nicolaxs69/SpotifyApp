@@ -15,4 +15,8 @@ class AppVectors {
   static const String heartLogo = '${basePath}heart_logo$format';
   static const String heartEmptyLogo = '${basePath}heart_empty_logo$format';
   static const String pauseLogo = '${basePath}pause_logo$format';
+  static const String playNextLogo = '${basePath}next_logo$format';
+  static const String playPreviousLogo = '${basePath}previous_logo$format';
+  static const String repeatLogo = '${basePath}repeat_logo$format';
+  static const String shuffleLogo = '${basePath}shuffle_logo$format';
 }
