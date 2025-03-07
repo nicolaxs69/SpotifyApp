@@ -104,7 +104,6 @@ class _ModeOption extends StatelessWidget {
     required this.title,
     required this.svgAsset,
     required this.onTap,
-    super.key,
   });
 
   @override

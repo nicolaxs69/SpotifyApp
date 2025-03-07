@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:refresh_flutter/common/helpers/is_dark_mode.dart';
 
 class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? title;

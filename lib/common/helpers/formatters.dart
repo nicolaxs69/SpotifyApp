@@ -2,7 +2,7 @@ import 'dart:core';
 
 extension DurationFormatter on String {
   String formatDuration() {
-    final parts = this.split('.');
+    final parts = split('.');
     final minutes = parts[0];
     var seconds = '00';
 
