@@ -22,7 +22,7 @@ class _HomeViewState extends State<HomeView>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 4, vsync: this);
   }
 
   @override
@@ -58,6 +58,7 @@ class _HomeViewState extends State<HomeView>
                     NewSongs(),
                     Center(child: Text('Video Content Coming Soon')),
                     Center(child: Text('Artist Content Coming Soon')),
+                    Center(child: Text('Podcast Content Coming Soon')),
                   ],
                 ),
               ),
