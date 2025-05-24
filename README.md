@@ -1,16 +1,14 @@
-# refresh_flutter
+# Refresh Music - A Flutter Music Player App
 
-A new Flutter project.
+Refresh Music is a music player application built using Flutter. This project serves as a demonstration of Flutter development skills and explores common patterns and practices in mobile app development.
 
-## Getting Started
+## Tech Stack
 
-This project is a starting point for a Flutter application.
+This project utilizes a variety of technologies, including:
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+*   **Frontend:** Flutter & Dart
+*   **Backend:** Firebase (Authentication, Cloud Firestore)
+*   **State Management:** BLoC (with Hydrated BLoC for persistence)
+*   **Audio Playback:** `just_audio` package
+*   **Dependency Injection:** `get_it`
+*   **UI Helpers:** `flutter_svg` for vector graphics, `wave` for visual effects.
